@@ -744,6 +744,10 @@ def subscribe(self, group_id:Groupid, qqid:QQid, msg):
 
 #预约提醒
 def subscribe_remind(self, group_id:Groupid, boss_num):
+	boss_num = int(boss_num) + 1
+	if boss_num > 5:
+		boss_num = 1
+	boss_num = str(boss_num)
 	group:Clan_group = Clan_group.get_or_none(group_id=group_id)
 	subscribe_list = safe_load_json(group.subscribe_list, {})
 	if len(subscribe_list) == 0 or boss_num not in subscribe_list: return
